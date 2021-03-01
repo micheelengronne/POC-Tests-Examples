@@ -2,7 +2,7 @@
 
 POC, tests, examples for students or collaborators.
 
-## Installer vagrant et virtualbox :
+## Installer vagrant et virtualbox :
 
 * télécharger vagrant
 * télécharger virtualbox
