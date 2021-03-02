@@ -24,16 +24,16 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp"
 
   config.vm.define "master" do |subconfig|
-    subconfig.vm.box = "generic/ubuntu1804"
+    subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8081
     subconfig.vm.provision "shell", inline: $script
   end
 
   config.vm.define "node1" do |subconfig|
-    subconfig.vm.box = "generic/ubuntu1804"
+    subconfig.vm.box = "ubuntu/bionic64"
   end
 
   config.vm.define "node2" do |subconfig|
-    subconfig.vm.box = "generic/ubuntu1804"
+    subconfig.vm.box = "ubuntu/bionic64"
   end
 end
