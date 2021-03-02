@@ -21,6 +21,8 @@ pip3 install ansible
 SCRIPT
 
 Vagrant.configure("2") do |config|
+  config.vm.network "private_network", type: "dhcp"
+
   config.vm.define "master" do |subconfig|
     subconfig.vm.box = "generic/ubuntu1804"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8081
