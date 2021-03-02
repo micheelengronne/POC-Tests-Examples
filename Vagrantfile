@@ -15,6 +15,9 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 echo Creating docker group if needed...
 sudo usermod -aG docker vagrant
+echo Installing ansible...
+sudo apt-get install -y python3-pip
+pip3 install ansible
 SCRIPT
 
 Vagrant.configure("2") do |config|
