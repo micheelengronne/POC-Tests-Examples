@@ -14,7 +14,6 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 echo Creating docker group if needed...
-sudo groupadd docker
 sudo usermod -aG docker vagrant
 SCRIPT
 
