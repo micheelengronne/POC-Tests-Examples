@@ -16,7 +16,7 @@ services:
       - 'DOCKER_CERT_PATH=/certs/client'
     volumes:
       - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs/client:ro
+      - jenkins-docker-certs:/certs
   docker:
     image: docker:dind
     networks:
@@ -30,7 +30,7 @@ services:
       - 'DOCKER_CERT_PATH=/certs/client'
     volumes:
       - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs/client:ro
+      - jenkins-docker-certs:/certs
 networks:
   jenkins:
     driver: bridge
