@@ -15,6 +15,9 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io git
 echo Creating docker group if needed...
 sudo usermod -aG docker vagrant
+sudo apt-get install -y python3-pip
+sudo python3 -m pip install --upgrade pip
+sudo pip3 install docker-compose
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -23,7 +26,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "master" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.hostname = "mastervm"
-    subconfig.vm.network :forwarded_port, guest: 8080, host: 8081
+    subconfig.vm.network :forwarded_port, guest: 8080, host: 8080
     subconfig.vm.provision "shell", inline: $script
 
     subconfig.vm.provider "virtualbox" do |v|

@@ -1,0 +1,39 @@
+---
+version: "3.8"
+services:
+  jenkins:
+    build: .
+    networks:
+      - jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    environment:
+      - 'DOCKER_HOST=tcp://docker:2376'
+      - 'DOCKER_DRIVER=overlay2'
+      - 'DOCKER_TLS_CERTDIR=/certs'
+      - 'DOCKER_TLS_VERIFY=1'
+      - 'DOCKER_CERT_PATH=/certs/client'
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+  docker:
+    image: docker:dind
+    networks:
+      - jenkins
+    privileged: true
+    environment:
+      - 'DOCKER_HOST=tcp://docker:2376'
+      - 'DOCKER_DRIVER=overlay2'
+      - 'DOCKER_TLS_CERTDIR=/certs'
+      - 'DOCKER_TLS_VERIFY=1'
+      - 'DOCKER_CERT_PATH=/certs/client'
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+networks:
+  jenkins:
+    driver: bridge
+volumes:
+  jenkins-data:
+  jenkins-docker-certs:
