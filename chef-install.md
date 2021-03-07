@@ -21,17 +21,22 @@ knife ssl fetch
 knife bootstrap IP -N node1vm -U root
 ```
 
-Start a workstation cookbook
+Start a workstation cookbook (the infra-as-code itself)
 
 ```
 mkdir -p /var/chef/cookbooks
 cd /var/chef/cookbooks
 chef generate cookbook firstcook
+```
+
+Upload it on the server and set the node for it
+
+```
 knife cookbook upload firstcook
 knife node run_list add node1vm firstcook
 ```
 
-Run on node
+Apply the code on node
 
 ```
 chef-client

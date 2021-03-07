@@ -15,9 +15,6 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io git
 echo Creating docker group if needed...
 sudo usermod -aG docker vagrant
-echo Installing ansible...
-sudo apt-get install -y python3-pip
-pip3 install ansible
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -37,10 +34,5 @@ Vagrant.configure("2") do |config|
   config.vm.define "node1" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.hostname = "node1vm"
-  end
-
-  config.vm.define "node2" do |subconfig|
-    subconfig.vm.box = "ubuntu/bionic64"
-    subconfig.vm.hostname = "node2vm"
   end
 end
