@@ -27,6 +27,9 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.hostname = "mastervm"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8080
+    subconfig.vm.network :forwarded_port, guest: 8000, host: 8000
+    subconfig.vm.network :forwarded_port, guest: 8443, host: 8443
+    subconfig.vm.network :forwarded_port, guest: 8022, host: 8022
     subconfig.vm.provision "shell", inline: $script
 
     subconfig.vm.provider "virtualbox" do |v|

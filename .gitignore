@@ -1,2 +1,5 @@
 .vagrant
 *.log
+compose/config
+compose/data
+compose/logs
