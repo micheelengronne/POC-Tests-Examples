@@ -7,6 +7,7 @@ check_interval = 0
 [[runners]]
   name = "node1vm"
   url = "http://mastervm:8000/"
+  clone_url = "http://x.x.x.x:8000"
   executor = "docker"
   [runners.custom_build_dir]
   [runners.cache]
@@ -22,4 +23,3 @@ check_interval = 0
     disable_cache = false
     volumes = ["/cache"]
     shm_size = 0
-    extra_hosts = ["matervm:x.x.x.x"]
