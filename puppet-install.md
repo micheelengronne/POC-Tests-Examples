@@ -44,5 +44,6 @@ On node again:
 puppet ssl bootstrap
 ```
 
-You can now manage your code in `/etc/puppetlabs/code/environment/production` (autodetected by the master)
+You can now manage your code in `/etc/puppetlabs/code/environment/production`
+(autodetected by the master)
 and apply it on the agent with `puppet agent -t`
