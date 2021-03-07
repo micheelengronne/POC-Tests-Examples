@@ -3,12 +3,12 @@ web:
   restart: always
   hostname: 'localhost'
   environment:
+  # admin user: root
+  # admin password: set at the first screen load
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'https://localhost'
-      # Add any other gitlab.rb configuration here, each on its own line
+      external_url 'http://localhost:8000'
   ports:
-    - '8000:80'
-    - '8443:443'
+    - '8000:8000'
     - '8022:22'
   volumes:
     - '$GITLAB_HOME/config:/etc/gitlab'

@@ -40,5 +40,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "node1" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.hostname = "node1vm"
+    subconfig.vm.provision "shell", inline: $script
   end
 end
