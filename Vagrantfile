@@ -28,7 +28,10 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = "mastervm"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8081
     subconfig.vm.provision "shell", inline: $script
-    subconfig.vm.memory = 4096
+
+    subconfig.vm.provider "virtualbox" do |v|
+      v.memory = 4096
+    end
   end
 
   config.vm.define "node1" do |subconfig|
