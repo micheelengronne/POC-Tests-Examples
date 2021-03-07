@@ -18,5 +18,5 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 knife configure initial
 knife ssl fetch
-knife bootstrap IP
+knife bootstrap IP -N node1vm
 ```
