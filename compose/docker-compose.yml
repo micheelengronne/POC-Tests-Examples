@@ -6,7 +6,7 @@ web:
   # admin user: root
   # admin password: set at the first screen load
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://localhost:8000'
+      external_url 'http://mastervm:8000'
   ports:
     - '8000:8000'
     - '8022:22'
