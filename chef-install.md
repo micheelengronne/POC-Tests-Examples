@@ -1,5 +1,7 @@
 # Chef Install
 
+Install chef-workstation
+
 ```
 wget https://packages.chef.io/files/stable/chef-server/14.1.0/ubuntu/18.04/chef-server-core_14.1.0-1_amd64.deb
 dpkg -i chef-server-core_14.1.0-1_amd64.deb
