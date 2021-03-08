@@ -1,5 +1,7 @@
 # Chef Install
 
+Everything should be done as `root`. So `sudo su` first.
+
 Install chef-workstation
 
 ```
