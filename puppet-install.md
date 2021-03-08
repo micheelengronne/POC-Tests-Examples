@@ -2,6 +2,9 @@
 
 Everything should be done as `root`. So `sudo su` first.
 
+Add in master and node1 `/etc/hosts` the hostname of the master (mastervm) as well
+as `puppet` as another hostname of the master.
+
 On master:
 
 ```
@@ -19,9 +22,6 @@ export PATH=$PATH:/opt/puppetlabs/bin
 puppetserver -v
 ```
 
-Add in node `/etc/hosts` the hostname of the master (mastervm) as well
-as `puppet` as another hostname of the master.
-
 On node:
 
 ```
@@ -33,8 +33,6 @@ source /etc/profile.d/puppet-agent.sh
 puppet config set server mastervm --section main
 puppet ssl bootstrap
 ```
-
-Add in master and node1 `/etc/hosts` the hostname `puppet` as another hostname of the master.
 
 On master:
 
