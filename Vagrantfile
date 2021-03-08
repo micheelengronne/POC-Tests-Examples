@@ -27,6 +27,8 @@ echo "Create CentOS user"
 adduser centos
 usermod --password $(openssl passwd -1 'centos') centos
 usermod -aG wheel centos
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+systemctl restart sshd
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -34,7 +36,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "deployment_vm" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
-    subconfig.vm.hostname = "mastervm"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8080
     subconfig.vm.network :forwarded_port, guest: 50000, host: 50000
     subconfig.vm.provision "shell", inline: $script
@@ -46,7 +47,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "app_vm" do |subconfig|
     subconfig.vm.box = "centos/7"
-    subconfig.vm.hostname = "node1vm"
+    subconfig.vm.network :forwarded_port, guest: 80, host: 8081
     subconfig.vm.provision "shell", inline: $script2
   end
 end
