@@ -2,6 +2,8 @@
 
 Everything should be done as `root`. So `sudo su` first.
 
+Add master hostname in node1 `/etc/hosts`.
+
 Install chef-workstation on master:
 
 ```
@@ -22,7 +24,7 @@ cp testtest /root/.chef/vagrant.pem
 chef-server-ctl org-create myorg 'my_orga' --association_user vagrant --filename test-validator.pem
 ```
 
-Add ssh between VMs, add master hostname in node1 `/etc/hosts`
+Add ssh between VMs.
 
 On master:
 
