@@ -1,5 +1,7 @@
 # Puppet Install
 
+Everything should be done as `root`. So `sudo su` first.
+
 On master:
 
 ```
