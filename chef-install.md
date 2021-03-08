@@ -7,6 +7,7 @@ wget https://packages.chef.io/files/stable/chef-server/14.1.0/ubuntu/18.04/chef-
 dpkg -i chef-server-core_14.1.0-1_amd64.deb
 chef-server-ctl reconfigure
 chef-server-ctl user-create vagrant testfirst testlast test@example.com 'testtest' --filename testtest
+mkdir /root/.chef
 cp testtest /root/.chef/vagrant.pem
 chef-server-ctl org-create myorg 'my_orga' --association_user vagrant --filename test-validator.pem
 ```
