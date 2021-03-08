@@ -1,39 +1,17 @@
----
-version: "3.8"
+version: '2'
 services:
   jenkins:
+    # image: 'bitnami/jenkins:2'
+    # user: user
+    # password: bitnami
     build: .
-    networks:
-      - jenkins
     ports:
-      - 8080:8080
-      - 50000:50000
-    environment:
-      - 'DOCKER_HOST=tcp://docker:2376'
-      - 'DOCKER_DRIVER=overlay2'
-      - 'DOCKER_TLS_CERTDIR=/certs'
-      - 'DOCKER_TLS_VERIFY=1'
-      - 'DOCKER_CERT_PATH=/certs/client'
-    volumes:
-      - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs
-  docker:
-    image: docker:dind
-    networks:
-      - jenkins
+      - '8080:8080'
+      - '50000:50000'
     privileged: true
-    environment:
-      - 'DOCKER_HOST=tcp://docker:2376'
-      - 'DOCKER_DRIVER=overlay2'
-      - 'DOCKER_TLS_CERTDIR=/certs'
-      - 'DOCKER_TLS_VERIFY=1'
-      - 'DOCKER_CERT_PATH=/certs/client'
     volumes:
-      - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs
-networks:
-  jenkins:
-    driver: bridge
+      - 'jenkins_data:/bitnami'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 volumes:
-  jenkins-data:
-  jenkins-docker-certs:
+  jenkins_data:
+    driver: local

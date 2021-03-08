@@ -18,18 +18,25 @@ sudo usermod -aG docker vagrant
 sudo apt-get install -y python3-pip
 sudo python3 -m pip install --upgrade pip
 sudo pip3 install docker-compose
+cd /vagrant
+docker-compose up -d
+SCRIPT
+
+$script2 = <<-SCRIPT
+echo "Create CentOS user"
+adduser centos
+usermod --password $(openssl passwd -1 'centos') centos
+usermod -aG wheel centos
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp"
 
-  config.vm.define "master" do |subconfig|
+  config.vm.define "deployment_vm" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.hostname = "mastervm"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8080
-    subconfig.vm.network :forwarded_port, guest: 8000, host: 8000
-    subconfig.vm.network :forwarded_port, guest: 8443, host: 8443
-    subconfig.vm.network :forwarded_port, guest: 8022, host: 8022
+    subconfig.vm.network :forwarded_port, guest: 50000, host: 50000
     subconfig.vm.provision "shell", inline: $script
 
     subconfig.vm.provider "virtualbox" do |v|
@@ -37,9 +44,9 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "node1" do |subconfig|
-    subconfig.vm.box = "ubuntu/bionic64"
+  config.vm.define "app_vm" do |subconfig|
+    subconfig.vm.box = "centos/7"
     subconfig.vm.hostname = "node1vm"
-    subconfig.vm.provision "shell", inline: $script
+    subconfig.vm.provision "shell", inline: $script2
   end
 end
