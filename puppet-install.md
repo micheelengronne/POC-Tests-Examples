@@ -32,7 +32,7 @@ puppet config set server mastervm --section main
 puppet ssl bootstrap
 ```
 
-Add in master `/etc/hosts` the hostname `puppet` as another hostname of the master.
+Add in master and node1 `/etc/hosts` the hostname `puppet` as another hostname of the master.
 
 On master:
 
