@@ -31,14 +31,26 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 systemctl restart sshd
 SCRIPT
 
+$script3 = <<-SCRIPT
+cd /vagrant
+source script3.sh
+SCRIPT
+
+$script4 = <<-SCRIPT
+cd /vagrant
+source script4.sh
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp"
 
   config.vm.define "deployment_vm" do |subconfig|
     subconfig.vm.box = "ubuntu/bionic64"
     subconfig.vm.network :forwarded_port, guest: 8080, host: 8080
+    subconfig.vm.network :forwarded_port, guest: 8085, host: 8085
     subconfig.vm.network :forwarded_port, guest: 50000, host: 50000
     subconfig.vm.provision "shell", inline: $script
+    subconfig.vm.provision "shell", inline: $script4
 
     subconfig.vm.provider "virtualbox" do |v|
       v.memory = 4096
@@ -47,7 +59,12 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "app_vm" do |subconfig|
     subconfig.vm.box = "centos/7"
+    subconfig.vm.network :forwarded_port, guest: 3000, host: 3000
+    subconfig.vm.network :forwarded_port, guest: 5601, host: 5601
+    subconfig.vm.network :forwarded_port, guest: 8010, host: 8010
+    subconfig.vm.network :forwarded_port, guest: 9090, host: 9090
     subconfig.vm.network :forwarded_port, guest: 80, host: 8081
     subconfig.vm.provision "shell", inline: $script2
+    subconfig.vm.provision "shell", inline: $script3
   end
 end
