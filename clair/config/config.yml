@@ -1,0 +1,22 @@
+---
+log_level: debug-color
+introspection_addr: ""
+http_listen_addr: ":6060"
+updaters: {}
+indexer:
+  connstring: host=postgres port=5432 user=clair dbname=clair password=ChangeMe sslmode=disable
+  scanlock_retry: 10
+  layer_scan_concurrency: 5
+  migrations: true
+matcher:
+  indexer_addr: http://clair:6060/
+  connstring: host=postgres port=5432 user=clair dbname=clair password=ChangeMe sslmode=disable
+  max_conn_pool: 100
+  migrations: true
+notifier:
+  indexer_addr: http://clair:6060/
+  matcher_addr: http://clair:6060/
+  connstring: host=postgres port=5432 user=clair dbname=clair password=ChangeMe sslmode=disable
+  migrations: true
+  delivery_interval: 5s
+  poll_interval: 15s

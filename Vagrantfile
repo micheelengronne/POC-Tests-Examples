@@ -41,6 +41,11 @@ cd /vagrant
 source script4.sh
 SCRIPT
 
+$script5 = <<-SCRIPT
+cd /vagrant
+source script5.sh
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp"
 
@@ -51,6 +56,7 @@ Vagrant.configure("2") do |config|
     subconfig.vm.network :forwarded_port, guest: 50000, host: 50000
     subconfig.vm.provision "shell", inline: $script
     subconfig.vm.provision "shell", inline: $script4
+    subconfig.vm.provision "shell", inline: $script5
 
     subconfig.vm.provider "virtualbox" do |v|
       v.memory = 4096

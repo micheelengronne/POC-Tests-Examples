@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  postgres:
+    image: postgres:9.6
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=ChangeMe
+      - POSTGRES_USER=clair
+      - POSTGRES_DB=clair
+  clair:
+    image: quay.io/coreos/clair:v4.0.1
+    restart: unless-stopped
+    volumes:
+      - ./config:/config:ro
+    expose:
+      - 6060
+    ports:
+      - "6060:6060"
+    depends_on:
+      postgres:
+        condition: service_started
+    command: [--conf, /config/config.yml]

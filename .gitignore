@@ -3,3 +3,6 @@
 compose/config
 compose/data
 compose/logs
+clair/clairctl-reports
+clair/clair-tmp
+clair/postgres-data
